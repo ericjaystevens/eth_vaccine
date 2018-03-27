@@ -6,7 +6,7 @@ contract Vaccine {
   struct vaccination {
     bytes32 name;
     bytes32 dateGiven;
-    bytes32 daysOfEffectiveness;
+    uint daysOfEffectiveness;
 
   }
 
@@ -22,6 +22,16 @@ contract Vaccine {
   function newPerson(bytes32 name) public returns (uint personID) {
     personID = numberOfPersons ++;
     persons[personID] = person(name, 0);
+  }
+
+  function getPersonName(uint personID) view public returns (bytes32 personName) {
+    return persons[personID].name;
+  }
+
+  function newVaccination(uint personID, bytes32 name, bytes32 dateGiven, uint daysOfEffectiveness)  public{
+    person storage Person = persons[personID];
+    Person.numberOfVaccinations ++;
+    Person.vaccinations[Person.numberOfVaccinations] = vaccination(name, dateGiven, daysOfEffectiveness);
   }
 
 }
