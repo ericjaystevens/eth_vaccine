@@ -1,13 +1,11 @@
 pragma solidity ^0.4.18;
-// We have to specify what version of compiler this code will compile with
 
 contract Vaccine {
 
-  struct vaccination {
+  struct vaccination{
     bytes32 name;
     bytes32 dateGiven;
     uint daysOfEffectiveness;
-
   }
 
   struct person {
@@ -17,7 +15,7 @@ contract Vaccine {
   }
 
   uint numberOfPersons;
-  mapping (uint => person) persons;
+  mapping (uint => person) public persons;
 
   function newPerson(bytes32 name) public returns (uint personID) {
     personID = numberOfPersons ++;
@@ -28,10 +26,16 @@ contract Vaccine {
     return persons[personID].name;
   }
 
-  function newVaccination(uint personID, bytes32 name, bytes32 dateGiven, uint daysOfEffectiveness)  public{
+//Malformed runs me out of gas
+  function newVaccination(uint personID, bytes32 name, bytes32 dateGiven, uint daysOfEffectiveness)  public {
+    persons[personID].numberOfVaccinations ++;
+    persons[1].vaccinations[1] = vaccination(name, dateGiven, daysOfEffectiveness);
+//persons[personID].vaccinations[1] = newVac
+  }
+  
+  function getVaccinationCount(uint personID) view public returns (uint numberOfVaccinations) {
     person storage Person = persons[personID];
-    Person.numberOfVaccinations ++;
-    Person.vaccinations[Person.numberOfVaccinations] = vaccination(name, dateGiven, daysOfEffectiveness);
+    numberOfVaccinations = Person.numberOfVaccinations;
   }
 
 }
