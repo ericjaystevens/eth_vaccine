@@ -9,8 +9,8 @@ if (typeof web3 !== 'undefined') {
     //web3 = new Web3(new Web3.providers.HttpProvider("http://172.16.2.130:8545"));
     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-Web3 = require('web3'
-web3 = new Web3(new Web3.providers.HttpProvider("http://patientblock.eastus.cloudapp.azure.com:8545"));
+Web3 = require('web3')
+web3 = new Web3(new Web3.providers.HttpProvider("http://40.71.31.167:8545"));
 code = fs.readFileSync('vaccine.sol').toString()
 solc = require('solc')
 compiledCode = solc.compile(code)
