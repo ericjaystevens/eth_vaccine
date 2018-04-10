@@ -3,7 +3,7 @@ web3 = new Web3(new Web3.providers.HttpProvider("http://patientblock.eastus.clou
 
 abi = JSON.parse('[{"constant":true,"inputs":[],"name":"getVaccinationCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"vaccineID","type":"uint256"}],"name":"getVaccineDate","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_dateGiven","type":"bytes32"}],"name":"newVaccination","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"vaccineID","type":"uint256"}],"name":"getVaccineName","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"}]');
 VaccineContract = web3.eth.contract(abi);
-contractInstance = VaccineContract.at('0xf764b36117a7de401c35d3dc1abf7615c121f069');
+contractInstance = VaccineContract.at('0x7d9c52d1ea05d75a15a43c15509050efbb4b24e0');
 
 $(document).ready(function() {
     //let numberOfVaccines = contractInstance.getVaccinationCount().toString()
