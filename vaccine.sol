@@ -1,37 +1,28 @@
 pragma solidity ^0.4.18;
-// We have to specify what version of compiler this code will compile with
 
 contract Vaccine {
 
-  struct vaccination {
-    bytes32 name;
-    bytes32 dateGiven;
-    uint daysOfEffectiveness;
+  mapping (uint=>bytes32) vaccineNames;
+  mapping (uint=>bytes32) dateGivens;
 
+  uint numberOfVaccinations;
+
+  function newVaccination(bytes32 _name, bytes32 _dateGiven )  public {
+    uint vaccineID = numberOfVaccinations ++;
+    vaccineNames[vaccineID] = _name;
+    dateGivens[vaccineID] = _dateGiven;
+  }
+  
+  function getVaccineName(uint vaccineID) view public returns (bytes32){
+    return vaccineNames[vaccineID]; 
   }
 
-  struct person {
-    bytes32 name;
-    uint numberOfVaccinations;
-    mapping (uint => vaccination) vaccinations;
+  function getVaccineDate(uint vaccineID) view public returns (bytes32){
+    return dateGivens[vaccineID]; 
   }
 
-  uint numberOfPersons;
-  mapping (uint => person) persons;
-
-  function newPerson(bytes32 name) public returns (uint personID) {
-    personID = numberOfPersons ++;
-    persons[personID] = person(name, 0);
-  }
-
-  function getPersonName(uint personID) view public returns (bytes32 personName) {
-    return persons[personID].name;
-  }
-
-  function newVaccination(uint personID, bytes32 name, bytes32 dateGiven, uint daysOfEffectiveness)  public{
-    person storage Person = persons[personID];
-    Person.numberOfVaccinations ++;
-    Person.vaccinations[Person.numberOfVaccinations] = vaccination(name, dateGiven, daysOfEffectiveness);
+  function getVaccinationCount() view public returns (uint) {
+    return numberOfVaccinations;
   }
 
 }
